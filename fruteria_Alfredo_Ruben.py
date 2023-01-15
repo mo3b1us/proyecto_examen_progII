@@ -3,31 +3,27 @@ import tkinter as tk
 
 
 def main():
+    # Frame raiz
     root = tk.Tk()
-
+    
     root.title("Gestion de inventario")
     root.resizable(False, False)
 
+    # Frame que contiene los botones con las posibles opciones
     menu = tk.Frame(root)
     menu.grid(row=0, column=0)
-    opciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos", "Salir"]
 
-    opcion_agregar = tk.Button(menu, text=opciones[0], command=lambda: print(opciones[0]), bg="gainsboro")
-    opcion_agregar.grid(row=0, column=0, sticky="news", padx=20, pady=10)
+    opciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos"]
 
-    opcion_eliminar = tk.Button(menu, text=opciones[1], command=lambda: print(opciones[1]), bg="gainsboro")
-    opcion_eliminar.grid(row=0, column=1, sticky="news", padx=20, pady=10)
+    for idx, opcion in enumerate(opciones):
+        boton_opcion = tk.Button(menu, text=opciones[idx], command=lambda: print(opciones[idx]), bg="gainsboro")
+        boton_opcion.grid(row=idx // 2, column=idx % 2, sticky="news", padx=20, pady=10)
 
-    opcion_modificar = tk.Button(menu, text=opciones[2], command=lambda: print(opciones[2]), bg="gainsboro")
-    opcion_modificar.grid(row=1, column=0, sticky="news", padx=20, pady=10)
-
-    opcion_mostrar = tk.Button(menu, text=opciones[3], command=lambda: print(opciones[3]), bg="gainsboro")
-    opcion_mostrar.grid(row=1, column=1, sticky="news", padx=20, pady=10)
-
+    # Frame que contiene el boton salir
     salir = tk.Frame(root)
     salir.grid(row=1, column=0)
 
-    opcion_salir = tk.Button(salir, text=opciones[4], command=root.destroy, bg="gainsboro")
+    opcion_salir = tk.Button(salir, text="Salir", command=root.destroy, bg="gainsboro")
     opcion_salir.grid(row=0, column=0, sticky="news", padx=20, pady=10)
 
     root.mainloop()
