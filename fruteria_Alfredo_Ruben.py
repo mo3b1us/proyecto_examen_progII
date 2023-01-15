@@ -10,7 +10,7 @@ def main():
 
     menu = tk.Frame(root)
     menu.grid(row=0, column=0)
-    opciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos"]
+    opciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos", "Salir"]
 
     opcion_agregar = tk.Button(menu, text=opciones[0], command=lambda: print(opciones[0]), bg="gainsboro")
     opcion_agregar.grid(row=0, column=0, sticky="news", padx=20, pady=10)
@@ -24,7 +24,13 @@ def main():
     opcion_mostrar = tk.Button(menu, text=opciones[3], command=lambda: print(opciones[3]), bg="gainsboro")
     opcion_mostrar.grid(row=1, column=1, sticky="news", padx=20, pady=10)
 
-    menu.mainloop()
+    salir = tk.Frame(root)
+    salir.grid(row=1, column=0)
+
+    opcion_salir = tk.Button(salir, text=opciones[4], command=root.destroy, bg="gainsboro")
+    opcion_salir.grid(row=0, column=0, sticky="news", padx=20, pady=10)
+
+    root.mainloop()
     return
 
 
