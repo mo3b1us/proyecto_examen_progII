@@ -12,6 +12,7 @@ def agregar_persona():
     tel = tel_entry.get()
     persona = [nombre, apellidos, correo, dni, tel]
     personas.append(persona)
+    return
 
 # Función para guardar los datos en un archivo Excel
 def guardar_datos():
