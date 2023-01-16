@@ -12,6 +12,7 @@ def eliminar_producto(espacio_escritura):
             return False
         else:
             df = df.loc[df["Nombre"] != producto]
+            df.reset_index(inplace=True, drop=True)
             df.to_excel('inventario.xlsx', index=False)
             print(f"Se ha eliminado el producto: {producto}")
             print(df)
@@ -31,11 +32,11 @@ def interfaz_eliminar():
     ventana_eliminar.grid(row=0, column=0)
 
     etiqueta_resultado = tk.Label(ventana_eliminar)
-    espacio_escritura = tk.Entry(ventana_eliminar)
-    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: eliminar_producto(espacio_escritura))
+    entrada_eliminar = tk.Entry(ventana_eliminar)
+    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: eliminar_producto(entrada_eliminar))
     boton_volver = tk.Button(ventana_eliminar, text="Volver", command=root.destroy)
 
-    objetos = [espacio_escritura, etiqueta_resultado, boton_eliminar, boton_volver]
+    objetos = [entrada_eliminar, etiqueta_resultado, boton_eliminar, boton_volver]
 
     for idx, objeto in enumerate(objetos):
         objeto.grid(row=idx, sticky="news", padx=20, pady=10)

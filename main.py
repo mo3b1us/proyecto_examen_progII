@@ -1,5 +1,6 @@
 import pandas as pd
 import tkinter as tk
+from ventana_agregar import *
 from ventana_eliminar import *
 
 
@@ -17,7 +18,7 @@ def main():
     acciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos"]
 
     # Creamos los botones
-    boton_agregar = tk.Button(menu, text=acciones[0], command=lambda: print(acciones[0]), bg="gainsboro")
+    boton_agregar = tk.Button(menu, text=acciones[0], command=interfaz_agregar, bg="gainsboro")
     boton_eliminar = tk.Button(menu, text=acciones[1], command=interfaz_eliminar, bg="gainsboro")
     boton_modificar = tk.Button(menu, text=acciones[2], command=lambda: print(acciones[2]), bg="gainsboro")
     boton_mostrar = tk.Button(menu, text=acciones[3], command=lambda: print(acciones[3]), bg="gainsboro")
