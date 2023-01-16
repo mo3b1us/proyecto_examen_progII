@@ -30,7 +30,7 @@ def interfaz_eliminar():
 
     etiqueta_resultado = tk.Label(ventana_eliminar)
     espacio_escritura = tk.Entry(ventana_eliminar)
-    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: eliminar_producto(espacio_escritura.get()))
+    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: (eliminar_producto(espacio_escritura.get()), espacio_escritura.delete(0, 'end')))
     boton_volver = tk.Button(ventana_eliminar, text="Volver", command=root.destroy)
 
     objetos = [espacio_escritura, etiqueta_resultado, boton_eliminar, boton_volver]
