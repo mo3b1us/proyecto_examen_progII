@@ -70,21 +70,21 @@ def modificar(producto):
     precio_entry = tk.Entry(ventana_modificar)
     precio_entry.grid(row=2, column=1)
 
-    def modificar_producto(producto,nombre,stock,precio):
-        df = cargar_archivo()
-        df.loc[[producto], ["Nombre"]] = nombre
-        df.loc[[producto], ["Stock"]] = stock
-        df.loc[[producto], ["Precio"]] = precio
-        #sobreescribimos el excel
-        df.to_excel("inventario.xlsx", index=False)
-
     # Crear el botón para confirmar la modificación
     boton_modificar = tk.Button(ventana_modificar, text="Modificar", command=lambda: modificar_producto (producto,nombre_entry.get(), stock_entry.get(), precio_entry.get()))
     boton_modificar.grid(row=3, column=1)
-    boton_salir = tk.Button(label_agregar_frame, text="Volver", command=ventana_modificar.destroy)
+    boton_salir = tk.Button(ventana_modificar, text="Volver", command=ventana_modificar.destroy)
     boton_salir.grid(row=5, column=1)
     
     ventana_modificar.mainloop()
+
+def modificar_producto(producto,nombre,stock,precio):
+    df = cargar_archivo()
+    df.loc[df['Nombre'] == producto, 'Nombre'] = nombre
+    df.loc[df['Nombre'] == nombre, 'Stock'] = stock
+    df.loc[df['Nombre'] == nombre, 'Precio'] = precio
+    #sobreescribimos el excel
+    df.to_excel("inventario.xlsx", index=False)
 
 
 def interfaz_agregar():
