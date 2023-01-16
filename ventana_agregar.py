@@ -12,15 +12,17 @@ def cargar_archivo():
 
 def agregar_producto(nombre, stock, precio):
     # Función para agregar el producto al diccionario de inventario
-    producto = [nombre, int(stock), float(precio)]
+    producto = {"Nombre":nombre, "Stock":stock, "Precio":precio}
     print(producto)
-    df = pd.DataFrame.from_dict(producto)
-    # Guardar dataframe en un archivo excel
-    df_arch = cargar_archivo()
-    df_merged = pd.concat([df_arch, df], axis=1)
-    df_merged.to_excel('inventario.xlsx')
-    return df_merged
+    df_producto = pd.DataFrame(producto, index = [0])
+    return df_producto
 
+def agregar_producto_excel(nombre,stock,precio):
+    df_producto = agregar_producto(nombre, stock, precio)
+    df_arch = cargar_archivo()
+    df_inventario = pd.concat([df_inventario, df_producto])
+    df_inventario.to_excel("inventario.xlsx",index=False)
+    
 def limpiar():
     nombre_entry.delete(0, "end")
     stock_entry.delete(0, "end")
