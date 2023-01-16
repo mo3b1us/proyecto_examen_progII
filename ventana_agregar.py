@@ -8,7 +8,7 @@ def cargar_archivo():
         df_arch = pd.read_excel('inventario.xlsx')
     except FileNotFoundError:
         df_arch = pd.DataFrame(columns=['Nombre', 'Stock', 'Precio'])
-        df_arch.to_excel('inventario.xlsx')
+        df_arch.to_excel('inventario.xlsx',index=False)
     return df_arch
 
 def agregar_producto(nombre, stock, precio):
@@ -30,7 +30,6 @@ def mostrar_df():
     ventana_df = tk.Toplevel()
     ventana_df.title("Dataframe")
     ventana_df.geometry("600x400")
-    ventana_df.protocol("WM_DELETE_WINDOW", ventana_df.destroy)
     frame_df = ttk.Frame(ventana_df)
     frame_df.pack(expand=True, fill='both')
     tabla_df = ttk.Label(frame_df, text=df.to_string())
@@ -38,11 +37,6 @@ def mostrar_df():
     boton_cerrar = ttk.Button(ventana_df, text="Cerrar", command=ventana_df.destroy)
     boton_cerrar.pack()
     
-def limpiar():
-    nombre_entry.delete(0, "end")
-    stock_entry.delete(0, "end")
-    precio_entry.delete(0, "end")
-
 root = tk.Tk()
 root.title("Agregar producto")
 # root.geometry("400x300")
@@ -69,7 +63,7 @@ precio_label.grid(row=3, column=0)
 precio_entry = tk.Entry(label_agregar_frame)
 precio_entry.grid(row=3, column=1)
 
-boton_agregar = tk.Button(label_agregar_frame, text="Agregar", command=lambda: [agregar_producto_excel(nombre_entry.get(), stock_entry.get(), precio_entry.get()) ,limpiar()])
+boton_agregar = tk.Button(label_agregar_frame, text="Agregar", command=lambda: [agregar_producto_excel(nombre_entry.get(), stock_entry.get(), precio_entry.get()) , nombre_entry.delete(0, "end"), stock_entry.delete(0, "end"), precio_entry.delete(0, "end")])
 boton_agregar.grid(row=4, column=1)
 
 boton_mostrar = tk.Button(label_agregar_frame, text="Mostrar", command=lambda: mostrar_df())
