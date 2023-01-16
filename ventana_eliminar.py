@@ -2,7 +2,9 @@ import tkinter as tk
 import pandas as pd
 
 
-def eliminar_producto(producto):
+def eliminar_producto(espacio_escritura):
+    producto = espacio_escritura.get()
+    espacio_escritura.delete(0, 'end')
     try:
         df = pd.read_excel('inventario.xlsx')
         if producto not in df['Nombre'].values:
@@ -30,7 +32,7 @@ def interfaz_eliminar():
 
     etiqueta_resultado = tk.Label(ventana_eliminar)
     espacio_escritura = tk.Entry(ventana_eliminar)
-    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: (eliminar_producto(espacio_escritura.get()), espacio_escritura.delete(0, 'end')))
+    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: eliminar_producto(espacio_escritura))
     boton_volver = tk.Button(ventana_eliminar, text="Volver", command=root.destroy)
 
     objetos = [espacio_escritura, etiqueta_resultado, boton_eliminar, boton_volver]
@@ -41,9 +43,7 @@ def interfaz_eliminar():
     root.mainloop()
     return
 
-
-# interfaz_eliminar()
-
+"""
 my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
                                 "Stock": [2, 7, 30],
                                 "Precio": [1.5, 1.85, 0.25]})
@@ -51,6 +51,4 @@ my_df.to_excel('inventario.xlsx', index=False)
 print(my_df)
 
 interfaz_eliminar()
-"""my_df.to_excel('inventario.xlsx', index=False)
-eliminar_producto('pera')"""
-# eliminar_producto("manzana")
+"""

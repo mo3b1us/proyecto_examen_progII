@@ -1,5 +1,6 @@
 import pandas as pd
 import tkinter as tk
+from ventana_eliminar import *
 
 
 def main():
@@ -17,7 +18,7 @@ def main():
 
     # Creamos los botones
     boton_agregar = tk.Button(menu, text=acciones[0], command=lambda: print(acciones[0]), bg="gainsboro")
-    boton_eliminar = tk.Button(menu, text=acciones[1], command=lambda: print(acciones[1]), bg="gainsboro")
+    boton_eliminar = tk.Button(menu, text=acciones[1], command=interfaz_eliminar, bg="gainsboro")
     boton_modificar = tk.Button(menu, text=acciones[2], command=lambda: print(acciones[2]), bg="gainsboro")
     boton_mostrar = tk.Button(menu, text=acciones[3], command=lambda: print(acciones[3]), bg="gainsboro")
 
@@ -37,4 +38,9 @@ def main():
 
 
 if __name__ == '__main__':
+    my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
+                                    "Stock": [2, 7, 30],
+                                    "Precio": [1.5, 1.85, 0.25]})
+    my_df.to_excel('inventario.xlsx', index=False)
+    print(my_df)
     main()
