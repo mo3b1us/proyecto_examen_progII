@@ -4,10 +4,10 @@ import tkinter as tk
 def cargar_archivo():
     # Cargar el archivo excel en el dataframe
     try:
-        df_arch = pd.read_excel("inventario.xlsx")
+        df_arch = pd.read_excel('inventario.xlsx')
     except FileNotFoundError:
         df_arch = pd.DataFrame(columns=['Nombre', 'Stock', 'Precio'])
-        df_arch.to_excel('inventario.xlsx', index=False)
+        df_arch.to_excel('inventario.xlsx')
     return df_arch
 
 def agregar_producto(nombre, stock, precio):
@@ -18,10 +18,11 @@ def agregar_producto(nombre, stock, precio):
     return df_producto
 
 def agregar_producto_excel(nombre,stock,precio):
-    df_producto = agregar_producto(nombre, stock, precio)
     df_arch = cargar_archivo()
-    df_inventario = pd.concat([df_inventario, df_producto])
-    df_inventario.to_excel("inventario.xlsx",index=False)
+    df_producto = agregar_producto(nombre, stock, precio)
+    df_arch = pd.concat([df_arch, df_producto])
+    print(df_arch)
+    df_arch.to_excel("inventario.xlsx",index=False)
     
 def limpiar():
     nombre_entry.delete(0, "end")
@@ -54,7 +55,7 @@ precio_label.grid(row=3, column=0)
 precio_entry = tk.Entry(label_agregar_frame)
 precio_entry.grid(row=3, column=1)
 
-boton_agregar = tk.Button(label_agregar_frame, text="Añadir", command=lambda: [agregar_producto(nombre_entry.get(), stock_entry.get(), precio_entry.get()) ,limpiar()])
+boton_agregar = tk.Button(label_agregar_frame, text="Añadir", command=lambda: [agregar_producto_excel(nombre_entry.get(), stock_entry.get(), precio_entry.get()) ,limpiar()])
 boton_agregar.grid(row=4, column=1)
 
 boton_salir = tk.Button(label_agregar_frame, text="Volver", command=root.destroy)
