@@ -49,6 +49,43 @@ def mostrar_df():
     boton_cerrar = ttk.Button(ventana_df, text="Cerrar", command=ventana_df.destroy)
     boton_cerrar.pack()
 
+def modificar(producto):
+    # Crear la ventana de tkinter
+    ventana_modificar = tk.Tk()
+    ventana_modificar.title("Modificar producto: " + producto)
+
+    # Crear las etiquetas y los cuadros de texto para ingresar los nuevos valores
+    nombre_label = tk.Label(ventana_modificar, text="Nombre:")
+    nombre_label.grid(row=0, column=0)
+    nombre_entry = tk.Entry(ventana_modificar)
+    nombre_entry.grid(row=0, column=1)
+
+    stock_label = tk.Label(ventana_modificar, text="Stock:")
+    stock_label.grid(row=1, column=0)
+    stock_entry = tk.Entry(ventana_modificar)
+    stock_entry.grid(row=1, column=1)
+
+    precio_label = tk.Label(ventana_modificar, text="Precio:")
+    precio_label.grid(row=2, column=0)
+    precio_entry = tk.Entry(ventana_modificar)
+    precio_entry.grid(row=2, column=1)
+
+    def modificar_producto(producto,nombre,stock,precio):
+        df = cargar_archivo()
+        df.loc[[producto], ["Nombre"]] = nombre
+        df.loc[[producto], ["Stock"]] = stock
+        df.loc[[producto], ["Precio"]] = precio
+        #sobreescribimos el excel
+        df.to_excel("inventario.xlsx", index=False)
+
+    # Crear el botón para confirmar la modificación
+    boton_modificar = tk.Button(ventana_modificar, text="Modificar", command=lambda: modificar_producto (producto,nombre_entry.get(), stock_entry.get(), precio_entry.get()))
+    boton_modificar.grid(row=3, column=1)
+    boton_salir = tk.Button(label_agregar_frame, text="Volver", command=ventana_modificar.destroy)
+    boton_salir.grid(row=5, column=1)
+    
+    ventana_modificar.mainloop()
+
 
 def interfaz_agregar():
     root = tk.Tk()
@@ -85,6 +122,11 @@ def interfaz_agregar():
                                                                              limpiar_entradas(entrada_nombre, entrada_stock, entrada_precio)))
     boton_mostrar = tk.Button(frame_accion, text="Mostrar", command=lambda: mostrar_df())
     boton_salir = tk.Button(frame_accion, text="Volver", command=root.destroy)
+    modificar_entry = tk.Entry(frame_accion)
+    modificar_entry.grid(row=5, column=0)
+    boton_modificar = tk.Button(frame_accion, text="Modificar", command=lambda: modificar(modificar_entry.get()))
+    boton_modificar.grid(row=5, column=1)
+
 
     botones = [boton_agregar, boton_mostrar, boton_salir]
 
