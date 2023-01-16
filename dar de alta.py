@@ -3,6 +3,11 @@ import tkinter as tk
 
 productos = []
 
+def cargar_archivo():
+    # Cargar el archivo excel en el dataframe
+    df_arch = pd.read_excel("inventario.xlsx")
+    return df_arch
+
 def salir():
     ventana_principal.destroy()
 
@@ -32,19 +37,24 @@ def alta_producto():
 
     # Creación de botón para agregar el producto al inventario
     agregar_boton = tk.Button(label_alta_frame, text="Agregar", bg="gainsboro",command=lambda: agregar_producto(nombre_entry.get(), stock_entry.get(), precio_entry.get()))
-    agregar_boton.grid(row=4, column=0, columnspan=2)
+    agregar_boton.grid(row=4,column=1)
 
 def agregar_producto(nombre, stock, precio):
     # Función para agregar el producto al diccionario de inventario
     producto = {"nombre" :nombre,"stock": int(stock), "precio": float(precio)}
     productos.append(producto)
     print(productos)
-    df = pd.DataFrame(productos, columns=['Nombre', 'Stock', 'Precio'])
+    df = pd.DataFrame.from_dict(productos)
     # Guardar dataframe en un archivo excel
-    df.to_excel('inventario.xlsx')
+    df_arch = cargar_archivo()
+    print(df_arch)
+    df_merged = pd.concat([df_arch, df], axis=1)
+    df_merged.to_excel('inventario.xlsx')
+    return df_merged
 
 ventana_principal = tk.Tk()
 ventana_principal.title("Gestión de inventario")
+ventana_principal.config(bg="lightblue")
 # ventana_principal.geometry("400x300")
 
 boton_salir = tk.Button(ventana_principal, text="Salir", command=salir)
