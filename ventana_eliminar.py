@@ -29,28 +29,33 @@ def interfaz_eliminar():
     root.title("Eliminar producto")
     root.resizable(False, False)
 
-    ventana_eliminar = tk.LabelFrame(root, text="Introduzca el producto que desee eliminar:")
+    ventana_eliminar = tk.LabelFrame(root, bg="burlywood1", text="Introduzca el producto que desee eliminar:", font=('Comic sans', 13))
     ventana_eliminar.grid(row=0, column=0)
 
-    etiqueta_resultado = tk.Label(ventana_eliminar)
-    entrada_eliminar = tk.Entry(ventana_eliminar)
-    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar", command=lambda: eliminar_producto(entrada_eliminar))
-    boton_volver = tk.Button(ventana_eliminar, text="Volver", command=root.destroy)
+    etiqueta_eliminar = tk.Label(ventana_eliminar, bg="burlywood1", text='Nombre:', font=('Comic sans', 12))
+    entrada_eliminar = tk.Entry(ventana_eliminar, font=('Comic sans', 12))
+    boton_eliminar = tk.Button(ventana_eliminar, text="Eliminar",
+                               font=('Comic sans', 12),
+                               command=lambda: eliminar_producto(entrada_eliminar))
+    boton_volver = tk.Button(ventana_eliminar, text="Volver",
+                             font=('Comic sans', 12),
+                             command=root.destroy)
 
-    objetos = [entrada_eliminar, etiqueta_resultado, boton_eliminar, boton_volver]
+    objetos = [etiqueta_eliminar, entrada_eliminar, boton_eliminar, boton_volver]
 
     for idx, objeto in enumerate(objetos):
-        objeto.grid(row=idx, sticky="news", padx=20, pady=10)
+        objeto.grid(row=idx // 2, column=idx % 2, sticky="news", padx=20, pady=10)
 
     root.mainloop()
     return
 
-"""
-my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
-                                "Stock": [2, 7, 30],
-                                "Precio": [1.5, 1.85, 0.25]})
-my_df.to_excel('inventario.xlsx', index=False)
-print(my_df)
 
-interfaz_eliminar()
-"""
+if __name__ == '__main__':
+    my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
+                                    "Stock": [2, 7, 30],
+                                    "Precio": [1.5, 1.85, 0.25]})
+    my_df.to_excel('inventario.xlsx', index=False)
+    print(my_df)
+
+    interfaz_eliminar()
+

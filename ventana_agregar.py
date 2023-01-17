@@ -80,6 +80,14 @@ def interfaz_agregar():
     root1.mainloop()
     return
 
+if __name__ == '__main__':
+    my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
+                                    "Stock": [2, 7, 30],
+                                    "Precio": [1.5, 1.85, 0.25]})
+    my_df.to_excel('inventario.xlsx', index=False)
+    print(my_df)
+
+    interfaz_agregar()
 
 
 
