@@ -3,6 +3,7 @@ import tkinter as tk
 from ventana_agregar import *
 from ventana_eliminar import *
 from ventana_modificar import *
+from ventana_mostrar import *
 
 def main():
     # Frame raiz
@@ -63,7 +64,7 @@ def main():
                               borderwidth=0)
     boton_mostrar = tk.Button(menu,
                               text=acciones[3]+"\t",
-                              command=lambda: print(acciones[3]),
+                              command=interfaz_mostrar,
                               font=('Comic sans', 30),
                               fg="darkorange",
                               bg=color_botones_menu,
