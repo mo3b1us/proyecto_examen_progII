@@ -2,7 +2,7 @@ import pandas as pd
 import tkinter as tk
 from ventana_agregar import *
 from ventana_eliminar import *
-
+from ventana_modificar import *
 
 def main():
     # Frame raiz
@@ -52,7 +52,7 @@ def main():
                               borderwidth=0)
     boton_modificar = tk.Button(menu,
                               text=acciones[2]+"\t",
-                              command=lambda: print(acciones[2]),
+                              command=interfaz_modificar,
                               font=('Comic sans', 30),
                               fg="blue",
                               bg=color_botones_menu,
