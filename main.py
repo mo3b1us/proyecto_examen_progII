@@ -17,6 +17,8 @@ def main():
     # Lista con los nombres de las acciones que se realizaran al pulsar cada boton
     acciones = ["Agregar producto", "Eliminar producto", "Modificar producto", "Mostrar todos"]
 
+    #foto_agregar = PhotoImage(file=agregar_626_626.png)
+
     # Creamos los botones
     boton_agregar = tk.Button(menu, text=acciones[0], command=interfaz_agregar, bg="gainsboro")
     boton_eliminar = tk.Button(menu, text=acciones[1], command=interfaz_eliminar, bg="gainsboro")

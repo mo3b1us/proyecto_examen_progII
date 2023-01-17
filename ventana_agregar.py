@@ -3,30 +3,22 @@ import tkinter as tk
 from utils import *
 
 
-def cargar_archivo():
-    # Cargar el archivo excel en el dataframe
+def agregar_producto(entradas):
+    nombre, stock, precio = obtener_caracteristicas(entradas)
+    limpiar_entradas(entradas)
+    producto = [{"Nombre": nombre, "Stock": stock, "Precio": precio}]
+    df_producto = pd.DataFrame.from_dict(producto)
     try:
-        df_arch = pd.read_excel('inventario.xlsx')
+        df = pd.read_excel('inventario.xlsx')
     except FileNotFoundError:
-        df_arch = pd.DataFrame(columns=['Nombre', 'Stock', 'Precio'])
-        df_arch.to_excel('inventario.xlsx', index=False)
-    return df_arch
-
-
-def agregar_producto(nombre, stock, precio):
-    # Función para agregar el producto al diccionario de inventario
-    producto = {"Nombre": nombre, "Stock": stock, "Precio": precio}
-    print(producto)
-    df_producto = pd.DataFrame(producto, index=[0])
-    return df_producto
-
-
-def agregar_producto_excel(nombre, stock, precio):
-    df_arch = cargar_archivo()
-    df_producto = agregar_producto(nombre, stock, precio)
-    df_arch = pd.concat([df_arch, df_producto])
-    print(df_arch)
-    df_arch.to_excel("inventario.xlsx", index=False)
+        print("No se encontro el fichero 'inventario.xlsx'")
+        df = pd.DataFrame(columns=['Nombre', 'Stock', 'Precio'])
+    except Exception:
+        print("Ha ocurrido un error inesperado")
+        df = pd.DataFrame(columns=['Nombre', 'Stock', 'Precio'])
+    df = pd.concat([df, df_producto], ignore_index=True)
+    print(df)
+    df.to_excel("inventario.xlsx", index=False)
     return
 
 
@@ -62,10 +54,7 @@ def interfaz_agregar():
 
     # Creación de etiquetas y cajas de texto para ingresar los datos del producto
 
-    boton_agregar = tk.Button(frame_accion,
-                              text="Agregar",
-                              command=lambda: (agregar_producto_excel(*obtener_caracteristicas(*entradas)),
-                                               limpiar_entradas(*entradas)))
+    boton_agregar = tk.Button(frame_accion, text="Agregar", command=lambda: agregar_producto(entradas))
     boton_salir = tk.Button(frame_accion, text="Volver", command=root.destroy)
 
     botones = [boton_agregar, boton_salir]
@@ -75,3 +64,13 @@ def interfaz_agregar():
 
     root.mainloop()
     return
+
+"""
+my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
+                                "Stock": [2, 7, 30],
+                                "Precio": [1.5, 1.85, 0.25]})
+my_df.to_excel('inventario.xlsx', index=False)
+print(my_df)
+
+interfaz_agregar()
+"""

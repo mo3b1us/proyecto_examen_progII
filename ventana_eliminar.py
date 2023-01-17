@@ -1,20 +1,21 @@
 import tkinter as tk
 import pandas as pd
+from utils import *
 
 
-def eliminar_producto(espacio_escritura):
-    producto = espacio_escritura.get()
-    espacio_escritura.delete(0, 'end')
+def eliminar_producto(entrada_eliminar):
+    nombre_producto = entrada_eliminar.get()
+    limpiar_entradas(entrada_eliminar)
     try:
         df = pd.read_excel('inventario.xlsx')
-        if producto not in df['Nombre'].values:
-            print(f"No se encuentra el producto: {producto}")
+        if nombre_producto not in df['Nombre'].values:
+            print(f"No se encuentra el producto: {nombre_producto}")
             return False
         else:
-            df = df.loc[df["Nombre"] != producto]
+            df = df.loc[df["Nombre"] != nombre_producto]
             df.reset_index(inplace=True, drop=True)
             df.to_excel('inventario.xlsx', index=False)
-            print(f"Se ha eliminado el producto: {producto}")
+            print(f"Se ha eliminado el producto: {nombre_producto}")
             print(df)
             return True
 
