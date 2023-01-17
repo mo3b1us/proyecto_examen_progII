@@ -23,12 +23,12 @@ def agregar_producto(entradas):
 
 
 def interfaz_agregar():
-    root1 = tk.Tk()
-    root1.title("Agregar producto")
-    root1.resizable(False, False)
+    root = tk.Tk()
+    root.title("Agregar producto")
+    root.resizable(False, False)
     # root.geometry("400x300")
 
-    ventana_escritura = tk.Frame(root1)
+    ventana_escritura = tk.Frame(root)
     ventana_escritura.pack()
 
     frame_escritura = tk.LabelFrame(ventana_escritura, text="Introduzca el producto:", font=('Comic sans', 15))
@@ -64,7 +64,7 @@ def interfaz_agregar():
 
     boton_volver = tk.Button(frame_accion,
                               text="Volver",
-                              command=root1.destroy,
+                              command=root.destroy,
                               font=('Comic sans', 20),
                               fg="red4",
                               bg="white",
@@ -77,7 +77,7 @@ def interfaz_agregar():
     for idx, boton in enumerate(botones):
         boton.grid(row=0, column=idx, sticky="nsew", padx=40, pady=10)
 
-    root1.mainloop()
+    root.mainloop()
     return
 
 if __name__ == '__main__':

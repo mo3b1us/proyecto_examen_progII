@@ -57,6 +57,7 @@ def interfaz_modificar():
     root.mainloop()
     return
 
+
 if __name__ == '__main__':
     my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
                                     "Stock": [2, 7, 30],
