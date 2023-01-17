@@ -4,10 +4,8 @@ from utils import *
 
 
 def modificar_producto(entradas):
-    limpiar_entradas(*entradas)
-    entrada_modificar, entrada_nombre, entrada_stock, entrada_precio = entradas
-    nombre_modificar = entrada_modificar.get()
-    nuevo_nombre = entrada_nombre.get()
+    nombre_modificar, nuevo_nombre, nuevo_stock, nuevo_precio = obtener_caracteristicas(entradas)
+    limpiar_entradas(entradas)
     try:
         df = pd.read_excel('inventario.xlsx')
         if nombre_modificar not in df['Nombre'].values:
@@ -15,8 +13,8 @@ def modificar_producto(entradas):
             return False
         else:
             df.loc[df['Nombre'] == nombre_modificar, 'Nombre'] = nuevo_nombre
-            df.loc[df['Nombre'] == nuevo_nombre, 'Stock'] = entrada_stock.get()
-            df.loc[df['Nombre'] == nuevo_nombre, 'Precio'] = entrada_precio.get()
+            df.loc[df['Nombre'] == nuevo_nombre, 'Stock'] = nuevo_stock
+            df.loc[df['Nombre'] == nuevo_nombre, 'Precio'] = nuevo_precio
             df.to_excel('inventario.xlsx', index=False)
             print(f"Se ha modificado el producto")
             return True
@@ -31,28 +29,52 @@ def interfaz_modificar():
     root.title("Modificar Producto")
     root.resizable(False, False)
 
-    ventana_modificar = tk.LabelFrame(root, text="Introduzca el producto que desee modificar:")
-    ventana_modificar.grid(row=0, column=0)
+    ventana_modificar = tk.Frame(root)
+    ventana_modificar.pack()
 
-    etiqueta_modificar = tk.Label(ventana_modificar)
-    entrada_modificar = tk.Entry(ventana_modificar)
-    etiqueta_nombre = tk.Label(ventana_modificar, text="Nuevo nombre:")
-    entrada_nombre = tk.Entry(ventana_modificar)
-    etiqueta_stock = tk.Label(ventana_modificar, text="Nuevo stock:")
-    entrada_stock = tk.Entry(ventana_modificar)
-    etiqueta_precio = tk.Label(ventana_modificar, text="Nuevo precio")
-    entrada_precio = tk.Entry(ventana_modificar)
+    frame_modificar = tk.LabelFrame(ventana_modificar, text="Introduzca el producto a modificar y sus nuevos valores: ", font=('Comic sans', 10))
+    frame_modificar.config(bg="burlywood1")
+    frame_modificar.grid(row=0, column=0, sticky="nswe")
+
+    etiqueta_modificar = tk.Label(frame_modificar, text="Nombre del producto:")
+    entrada_modificar = tk.Entry(frame_modificar)
+    etiqueta_nombre = tk.Label(frame_modificar, text="Nuevo nombre:")
+    entrada_nombre = tk.Entry(frame_modificar)
+    etiqueta_stock = tk.Label(frame_modificar, text="Nuevo stock:")
+    entrada_stock = tk.Entry(frame_modificar)
+    etiqueta_precio = tk.Label(frame_modificar, text="Nuevo precio:")
+    entrada_precio = tk.Entry(frame_modificar)
 
     entradas = [entrada_modificar, entrada_nombre, entrada_stock, entrada_precio]
 
-    boton_modificar = tk.Button(ventana_modificar, text="Modificar", command=lambda: modificar_producto(entradas))
-    boton_volver = tk.Button(ventana_modificar, text="Volver", command=root.destroy)
+    frame_accion = tk.Frame(ventana_modificar)
+    frame_accion.config(bg="burlywood1")
+    frame_accion.grid(row=1, column=0, sticky="news")
 
-    objetos = [entrada_modificar, etiqueta_modificar, etiqueta_nombre, entrada_nombre, etiqueta_stock, entrada_stock,
+    boton_modificar = tk.Button(frame_accion,
+                                text="Modificar",
+                                command=lambda: modificar_producto(entradas),
+                                font=('Comic sans', 12),
+                                fg="red4",
+                                bg="white",
+                                activeforeground="red4",
+                                activebackground="white",
+                                borderwidth=0)
+    boton_volver = tk.Button(frame_accion,
+                             text="Volver",
+                             command=root.destroy,
+                             font=('Comic sans', 12),
+                             fg="red4",
+                             bg="white",
+                             activeforeground="red4",
+                             activebackground="white",
+                             borderwidth=0)
+
+    objetos = [etiqueta_modificar, entrada_modificar, etiqueta_nombre, entrada_nombre, etiqueta_stock, entrada_stock,
                etiqueta_precio, entrada_precio, boton_modificar, boton_volver]
 
     for idx, objeto in enumerate(objetos):
-        objeto.grid(row=idx, sticky="news", padx=20, pady=10)
+        objeto.grid(row=idx // 2, column=idx % 2, sticky="news", padx=20, pady=10)
 
     root.mainloop()
     return
