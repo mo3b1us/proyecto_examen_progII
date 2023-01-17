@@ -1,6 +1,7 @@
 import pandas as pd
 import tkinter as tk
-
+from utils import *
+from main import *
 
 def mostrar_productos(venta_mostrar):
     df = pd.read_excel('inventario.xlsx')
@@ -18,18 +19,13 @@ def mostrar_productos(venta_mostrar):
     return
 
 
-def interfaz_mostrar():
-    root = tk.Tk()
-    root.title("Inventario")
-    root.resizable(False, False)
-
+def interfaz_mostrar(root, menu):
     ventana_mostrar = tk.Frame(root)
-    ventana_mostrar.pack(expand=False, fill=tk.X)
 
     mostrar_productos(ventana_mostrar)
     boton_volver = tk.Button(ventana_mostrar,
                              text="Volver",
-                             command=root.destroy,
+                             command=lambda: cambiar_frame(ventana_mostrar, menu),
                              font=('Comic sans', 12),
                              fg="red4",
                              bg="white",
@@ -37,8 +33,7 @@ def interfaz_mostrar():
                              activebackground="white",
                              borderwidth=0)
     boton_volver.grid(column=1)
-    root.mainloop()
-    return
+    return ventana_mostrar
 
 
 if __name__ == '__main__':

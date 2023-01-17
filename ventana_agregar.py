@@ -22,15 +22,10 @@ def agregar_producto(entradas):
     return
 
 
-def interfaz_agregar():
-    root = tk.Tk()
-    root.title("Agregar producto")
-    root.resizable(False, False)
+def interfaz_agregar(root, menu):
+    ventana_agregar = tk.Frame(root)
 
-    ventana_escritura = tk.Frame(root)
-    ventana_escritura.pack()
-
-    frame_escritura = tk.LabelFrame(ventana_escritura, text="Introduzca el producto:", font=('Comic sans', 15))
+    frame_escritura = tk.LabelFrame(ventana_agregar, text="Introduzca el producto:", font=('Comic sans', 15))
     frame_escritura.config(bg="burlywood1")
     frame_escritura.grid(row=0, column=0, sticky="nswe")
 
@@ -47,7 +42,7 @@ def interfaz_agregar():
     for idx, objeto in enumerate(objetos):
         objeto.grid(row=idx // 2, column=idx % 2, sticky="nsew", padx=20, pady=20)
 
-    frame_accion = tk.Frame(ventana_escritura)
+    frame_accion = tk.Frame(ventana_agregar)
     frame_accion.config(bg="burlywood1")
     frame_accion.grid(row=1, column=0, sticky='nsew')
 
@@ -63,7 +58,7 @@ def interfaz_agregar():
 
     boton_volver = tk.Button(frame_accion,
                               text="Volver",
-                              command=root.destroy,
+                              command=lambda: cambiar_frame(ventana_agregar, menu),
                               font=('Comic sans', 20),
                               fg="red4",
                               bg="white",
@@ -76,8 +71,8 @@ def interfaz_agregar():
     for idx, boton in enumerate(botones):
         boton.grid(row=0, column=idx, sticky="nsew", padx=40, pady=10)
 
-    root.mainloop()
-    return
+
+    return ventana_agregar
 
 if __name__ == '__main__':
     my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],

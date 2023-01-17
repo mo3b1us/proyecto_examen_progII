@@ -24,13 +24,9 @@ def modificar_producto(entradas):
         return -1
 
 
-def interfaz_modificar():
-    root = tk.Tk()
-    root.title("Modificar Producto")
-    root.resizable(False, False)
+def interfaz_modificar(root, menu):
 
     ventana_modificar = tk.Frame(root)
-    ventana_modificar.pack()
 
     frame_modificar = tk.LabelFrame(ventana_modificar, text="Introduzca el producto a modificar y sus nuevos valores: ", font=('Comic sans', 10))
     frame_modificar.config(bg="burlywood1")
@@ -62,7 +58,7 @@ def interfaz_modificar():
                                 borderwidth=0)
     boton_volver = tk.Button(frame_accion,
                              text="Volver",
-                             command=root.destroy,
+                             command=lambda: cambiar_frame(ventana_modificar, menu),
                              font=('Comic sans', 12),
                              fg="red4",
                              bg="white",
@@ -76,8 +72,7 @@ def interfaz_modificar():
     for idx, objeto in enumerate(objetos):
         objeto.grid(row=idx // 2, column=idx % 2, sticky="news", padx=20, pady=10)
 
-    root.mainloop()
-    return
+    return ventana_modificar
 
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ def main():
 
     # Frame que contiene los botones con las posibles opciones
     menu = tk.Frame(root)
-    menu.grid(row=0, column=0)
+    menu.pack()
     menu.config(background='sea green')
 
     # Lista con los nombres de las acciones que se realizaran al pulsar cada boton
@@ -31,7 +31,7 @@ def main():
     # Creamos los botones
     boton_agregar = tk.Button(menu,
                               text=acciones[0]+"\t",
-                              command=interfaz_agregar,
+                              command=lambda: cambiar_frame(menu, interfaz_agregar(root, menu)),
                               font=('Comic sans', 30),
                               fg="green",
                               bg=color_botones_menu,
@@ -42,7 +42,7 @@ def main():
                               borderwidth=0,)
     boton_eliminar = tk.Button(menu,
                               text=acciones[1]+"\t",
-                              command=interfaz_eliminar,
+                              command=lambda: cambiar_frame(menu, interfaz_eliminar(root, menu)),
                               font=('Comic sans', 30),
                               fg="red",
                               bg=color_botones_menu,
@@ -53,7 +53,7 @@ def main():
                               borderwidth=0)
     boton_modificar = tk.Button(menu,
                               text=acciones[2]+"\t",
-                              command=interfaz_modificar,
+                              command=lambda: cambiar_frame(menu, interfaz_modificar(root, menu)),
                               font=('Comic sans', 30),
                               fg="blue",
                               bg=color_botones_menu,
@@ -64,7 +64,7 @@ def main():
                               borderwidth=0)
     boton_mostrar = tk.Button(menu,
                               text=acciones[3]+"\t",
-                              command=interfaz_mostrar,
+                              command=lambda: cambiar_frame(menu, interfaz_mostrar(root, menu)),
                               font=('Comic sans', 30),
                               fg="darkorange",
                               bg=color_botones_menu,
