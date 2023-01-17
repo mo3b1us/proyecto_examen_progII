@@ -1,4 +1,4 @@
-import ventana_agregar.py
+import ventana_agregar
 import pandas as pd
 import tkinter as tk
 

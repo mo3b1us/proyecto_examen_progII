@@ -2,3 +2,5 @@
 .idea/
 
 inventario.xlsx
+
+__pycache__/

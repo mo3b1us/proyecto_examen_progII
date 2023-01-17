@@ -1,7 +1,7 @@
 import pandas as pd
 import tkinter as tk
 from tkinter import ttk
-from tkintertable import TableCanvas
+from modificar import *
 
 def limpiar_entradas(*entradas):
     for entrada in entradas:
@@ -39,25 +39,20 @@ def agregar_producto_excel(nombre,stock,precio):
 
 def mostrar_df():
     df = cargar_archivo()
-    #ventana_df = tk.Toplevel()
-    #ventana_df.title("Dataframe")
-    #ventana_df.geometry("600x400")
-    #frame_df = ttk.Frame(ventana_df)
-    #frame_df.pack(expand=True, fill='both')
-    #tabla_df = ttk.Label(frame_df, text=df.to_string())
-    #tabla_df.pack(expand=True, fill='both')
-    ventana_df = tk.Tk()
-    table = TableCanvas(ventana_df, dataframe=df)
-    table.show()
-    boton_cerrar = ttk.Button(ventana_df, text="Cerrar", command=ventana_df.destroy)
-    boton_cerrar.pack()
-    ventana_df.mainloop()
+    ventana_df = tk.Toplevel()
+    ventana_df.title("Dataframe")
+    ventana_df.geometry("600x400")
+    frame_df = ttk.Frame(ventana_df)
+    frame_df.pack(expand=True, fill='both')
+    tabla_df = ttk.Label(frame_df, text=df.to_string())
+    tabla_df.pack(expand=True, fill='both')
 
 def interfaz_agregar():
     root = tk.Tk()
     root.title("Agregar producto")
     root.resizable(False, False)
     # root.geometry("400x300")
+
 
     ventana_escritura = tk.Frame(root)
     ventana_escritura.pack()
