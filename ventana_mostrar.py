@@ -26,7 +26,7 @@ def interfaz_mostrar(root, menu):
     boton_volver = tk.Button(ventana_mostrar,
                              text="Volver",
                              command=lambda: cambiar_frame(ventana_mostrar, menu),
-                             font=('Comic sans', 12),
+                             font=('Comic sans', 20),
                              fg="red4",
                              bg="white",
                              activeforeground="red4",
@@ -35,6 +35,7 @@ def interfaz_mostrar(root, menu):
     boton_volver.grid(column=1)
     return ventana_mostrar
 
-
+"""
 if __name__ == '__main__':
     interfaz_mostrar()
+"""

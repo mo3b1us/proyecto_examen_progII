@@ -76,7 +76,7 @@ def interfaz_modificar(root, menu):
 
     return ventana_modificar
 
-
+"""
 if __name__ == '__main__':
     my_df = pd.DataFrame.from_dict({"Nombre": ['manzana', 'pera', 'uva'],
                                     "Stock": [2, 7, 30],
@@ -85,3 +85,4 @@ if __name__ == '__main__':
     print(my_df)
 
     interfaz_modificar()
+"""
