@@ -10,6 +10,7 @@ def main():
     root = tk.Tk()
     root.title("Gestión de inventario")
     root.resizable(False, False)
+    root.geometry('1150x500')
 
     foto_icono = PhotoImage(file='imagenes/icono_ventana.png')
     root.iconphoto(False, foto_icono)

@@ -16,5 +16,5 @@ def obtener_caracteristicas(entradas: list):
 
 
 def cambiar_frame(actual, nuevo):
-    nuevo.pack(fill='both', expand=1)
+    nuevo.pack(fill='both', expand=True)
     actual.forget()

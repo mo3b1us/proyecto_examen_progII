@@ -26,9 +26,11 @@ def modificar_producto(entradas):
 
 def interfaz_modificar(root, menu):
 
-    ventana_modificar = tk.Frame(root)
+    ventana_modificar = tk.Frame(root, bg="burlywood1")
 
-    frame_modificar = tk.LabelFrame(ventana_modificar, text="Introduzca el producto a modificar y sus nuevos valores: ", font=('Comic sans', 10))
+    frame_modificar = tk.LabelFrame(ventana_modificar,
+                                    text="Introduzca el producto a modificar y sus nuevos valores: ",
+                                    font=('Comic sans', 10))
     frame_modificar.config(bg="burlywood1")
     frame_modificar.grid(row=0, column=0, sticky="nswe")
 

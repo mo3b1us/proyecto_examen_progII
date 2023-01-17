@@ -23,9 +23,9 @@ def agregar_producto(entradas):
 
 
 def interfaz_agregar(root, menu):
-    ventana_agregar = tk.Frame(root)
+    ventana_agregar = tk.Frame(root, bg="burlywood1")
 
-    frame_escritura = tk.LabelFrame(ventana_agregar, text="Introduzca el producto:", font=('Comic sans', 15))
+    frame_escritura = tk.LabelFrame(ventana_agregar, bg="burlywood1", text="Introduzca el producto:", font=('Comic sans', 15))
     frame_escritura.config(bg="burlywood1")
     frame_escritura.grid(row=0, column=0, sticky="nswe")
 
