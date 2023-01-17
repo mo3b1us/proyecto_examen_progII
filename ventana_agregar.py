@@ -26,7 +26,6 @@ def interfaz_agregar():
     root = tk.Tk()
     root.title("Agregar producto")
     root.resizable(False, False)
-    # root.geometry("400x300")
 
     ventana_escritura = tk.Frame(root)
     ventana_escritura.pack()
